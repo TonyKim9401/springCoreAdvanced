@@ -8,6 +8,9 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class LogTraceConfig {
 
+    /**
+     * Singleton concurrent thread issue 발생
+     */
     @Bean
     public LogTrace logTrace() {
         return new FiledLogTrace();
