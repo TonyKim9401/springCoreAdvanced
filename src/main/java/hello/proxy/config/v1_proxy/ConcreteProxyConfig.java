@@ -30,4 +30,5 @@ public class ConcreteProxyConfig {
         OrderRepositoryV2 repositoryImpl = new OrderRepositoryV2();
         return new OrderRepositoryConcreteProxy(repositoryImpl, logTrace);
     }
+
 }
