@@ -1,0 +1,57 @@
+package hello.proxy.proxyfactory;
+
+import hello.proxy.common.advice.TimeAdvice;
+import hello.proxy.common.service.ConcreteService;
+import hello.proxy.common.service.ServiceImpl;
+import hello.proxy.common.service.ServiceInterface;
+import lombok.extern.slf4j.Slf4j;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
+import org.springframework.aop.framework.ProxyFactory;
+import org.springframework.aop.support.AopUtils;
+
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.springframework.aop.support.AopUtils.*;
+
+@Slf4j
+public class ProxyFactoryTest {
+
+    @DisplayName("인터페이스가 잇으면 JDK 동적 프록시 사용")
+    @Test
+    void interfaceProxy() {
+        ServiceInterface target = new ServiceImpl();
+        ProxyFactory proxyFactory = new ProxyFactory(target);
+        proxyFactory.addAdvice(new TimeAdvice());
+        ServiceInterface proxy = (ServiceInterface) proxyFactory.getProxy();
+
+        log.info("targetClass={}", target.getClass());
+        log.info("proxyClass={}", proxy.getClass());
+
+        proxy.save();
+
+        assertThat(isAopProxy(proxy)).isTrue();
+        assertThat(isJdkDynamicProxy(proxy)).isTrue();
+        assertThat(isCglibProxy(proxy)).isFalse();
+    }
+
+    @DisplayName("구체 클래스만 있다면 CGLIB 동적 프록시 사용")
+    @Test
+    void Proxy() {
+        ConcreteService target = new ConcreteService();
+        ProxyFactory proxyFactory = new ProxyFactory(target);
+        proxyFactory.addAdvice(new TimeAdvice());
+        ConcreteService proxy = (ConcreteService) proxyFactory.getProxy();
+
+        log.info("targetClass={}", target.getClass());
+        log.info("proxyClass={}", proxy.getClass());
+
+        proxy.call();
+        assertThat(isAopProxy(proxy)).isTrue();
+        assertThat(isJdkDynamicProxy(proxy)).isFalse();
+        assertThat(isCglibProxy(proxy)).isTrue();
+    }
+
+
+
+
+}
