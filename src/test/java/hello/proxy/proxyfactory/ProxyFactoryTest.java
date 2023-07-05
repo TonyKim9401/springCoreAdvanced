@@ -70,7 +70,4 @@ public class ProxyFactoryTest {
         assertThat(isCglibProxy(proxy)).isTrue();
     }
 
-
-
-
 }
