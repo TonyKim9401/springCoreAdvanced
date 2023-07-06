@@ -54,5 +54,4 @@ public class AutoProxyConfig {
         DefaultPointcutAdvisor advisor = new DefaultPointcutAdvisor(pointcut, advice);
         return advisor;
     }
-
 }
