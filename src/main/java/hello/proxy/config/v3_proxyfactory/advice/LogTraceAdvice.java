@@ -33,5 +33,4 @@ public class LogTraceAdvice implements MethodInterceptor {
             throw e;
         }
     }
-
 }
