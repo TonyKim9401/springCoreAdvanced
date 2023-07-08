@@ -58,4 +58,5 @@ public class AspectV6Advice {
     public void doAfter(JoinPoint joinPoint) {
         log.info("[after] {}", joinPoint.getSignature());
     }
+
 }
