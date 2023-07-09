@@ -65,7 +65,7 @@ public class ExecutionTest {
     }
 
     @Test
-    void packageExactMatch() {
+    void packageExactMatch1() {
         pointcut.setExpression("execution(* hello.aop.member.MemberServiceImpl.hello(..))");
         assertThat(pointcut.matches(helloMethod, MemberServiceImpl.class)).isTrue();
     }
@@ -78,8 +78,8 @@ public class ExecutionTest {
 
     @Test
     void packageExactMatchFalse() { //패키지 위치에 정확하게 매칭되야함, 아니면 ..로 하위 패키지까지 포함 가능
-        pointcut.setExpression("execution(* hello.aop.member.*.*(..))");
-        assertThat(pointcut.matches(helloMethod, MemberServiceImpl.class)).isTrue();
+        pointcut.setExpression("execution(* hello.aop.*.*(..))");
+        assertThat(pointcut.matches(helloMethod, MemberServiceImpl.class)).isFalse();
     }
 
     @Test
