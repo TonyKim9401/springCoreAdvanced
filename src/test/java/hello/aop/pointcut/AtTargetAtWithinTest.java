@@ -1,5 +1,6 @@
 package hello.aop.pointcut;
 
+import hello.aop.member.MemberService;
 import hello.aop.member.annotation.ClassAop;
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.ProceedingJoinPoint;
@@ -19,6 +20,9 @@ import org.springframework.context.annotation.Import;
 public class AtTargetAtWithinTest {
     @Autowired
     Child child;
+
+    @Autowired
+    MemberService memberService;
 
     @Test
     void success() {
