@@ -10,10 +10,11 @@ import org.springframework.context.annotation.Import;
 
 @Slf4j
 @Import(ProxyDIAspect.class)
-@SpringBootTest(
-        properties = {"spring.aop.proxy-target-class=true",
-                "spring.main.allow-circular-references=true"}
-        )
+@SpringBootTest(properties = "spring.main.allow-circular-references=true")
+//@SpringBootTest(
+//        properties = {"spring.aop.proxy-target-class=true",
+//                "spring.main.allow-circular-references=true"}
+//        )
 //"spring.aop.proxy-target-class=false",  JDK 동적 프록시 -> 실패
 public class ProxyDITest {
 
